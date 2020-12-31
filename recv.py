@@ -3,15 +3,16 @@ import threading
 import os
 import datetime
 
-
+print('')
 sc = socket.socket(socket.AF_INET , socket.SOCK_DGRAM)
-server_ip = ''
-server_port = 
+server_ip = input('enter your ip : ')
+server_port = int(input('enter your port number : '))
 sc.bind((server_ip , server_port))
 
 sc1 = socket.socket(socket.AF_INET , socket.SOCK_DGRAM)
-sip = ''
-spo = 
+sip = input('enter other end ip : ')
+spo = int(input('enter other end port number : '))
+print('')
 
 def time():
 
@@ -19,19 +20,17 @@ def time():
    t = t.split(' ')[1][:5]
    return t
 
-def rc():
+def receive():
   while 1:
 
-    msg = sc.recvfrom(512)
-    os.system('tput setaf 3')
-    print(msg[0].decode())
+    msg = sc.recvfrom(1024)
+    os.system('tput setaf 32')
+    print('\U0001F464' + ' ' + msg[0].decode())
     os.system('tput setaf 7')
     t_ = time()
     print('__'*(36) + t_ + '\n')
 
-    
-
-def se():
+def send():
   while 1:
 
     msg = input()
@@ -39,10 +38,14 @@ def se():
     t_ = time()
     print('__'*(36) + t_ + '\n')
 
-x1 = threading.Thread(target=rc)
-x2 = threading.Thread(target=se)
-x1.start()
-x2.start()
+print('~'*(32) + 'TERMINAL-CHAT' + '~'*(32) + '\n')
+
+receiveThread = threading.Thread(target = receive)
+sendThread = threading.Thread(target = send)
+
+receiveThread.start()
+sendThread.start()
+
 
 
 
