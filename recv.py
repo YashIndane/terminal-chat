@@ -29,7 +29,7 @@ def receive():
   while 1:
     
     buffer_size = 1024
-    msg = socket1.recvfrom(buffer_sizeo)
+    msg = socket1.recvfrom(buffer_size)
     os.system('tput setaf 32')
     print('\U0001F464' + ' ' + msg[0].decode())
     os.system('tput setaf 7')
